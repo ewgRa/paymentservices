@@ -40,11 +40,6 @@ type PaymentOgoneService interface {
 
 type paymentOgoneService struct{}
 
-type aliasAcceptResponse struct {
-	V   string `json:"v"`
-	Err string `json:"err,omitempty"` // errors don't define JSON marshaling
-}
-
 func (paymentOgoneService) AliasAccept(request interface{}) (string, error) {
 	// FIXME XXX: implementation
 	m := request.(map[string]interface{})
@@ -58,6 +53,11 @@ func (paymentOgoneService) AliasDirectLink(orderId int, amount int, currency str
 
 	// FIXME XXX: implementation
 	return "OK", nil
+}
+
+type aliasAcceptResponse struct {
+	V   string `json:"v"`
+	Err string `json:"err,omitempty"` // errors don't define JSON marshaling
 }
 
 type aliasDirectLinkRequest struct {
