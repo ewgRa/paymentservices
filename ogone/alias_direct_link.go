@@ -10,6 +10,24 @@ import (
 	"../service"
 )
 
+func aliasDirectLink(orderId int, amount int, currency string, alias string) (string, error) {
+	if "" == alias {
+		return "", errors.New("Alias required")
+	}
+
+	// FIXME XXX: implementation
+	return "OK", nil
+}
+
+func NewAliasDirectLinkHandler(ctx context.Context) *httptransport.Server {
+	return httptransport.NewServer(
+		ctx,
+		makeAliasDirectLinkEndpoint(),
+		decodeAliasDirectLinkRequest,
+		service.EncodeResponse,
+	)
+}
+
 type AliasDirectLinkRequestStruct struct {
 	orderId  int    `json:"orderId"`
 	amount   int    `json:","`
@@ -20,15 +38,6 @@ type AliasDirectLinkRequestStruct struct {
 type AliasDirectLinkResponseStruct struct {
 	V   string `json:"v"`
 	Err string `json:"err,omitempty"` // errors don't define JSON marshaling
-}
-
-func aliasDirectLink(orderId int, amount int, currency string, alias string) (string, error) {
-	if "" == alias {
-		return "", errors.New("Alias required")
-	}
-
-	// FIXME XXX: implementation
-	return "OK", nil
 }
 
 func makeAliasDirectLinkEndpoint() endpoint.Endpoint {
@@ -48,13 +57,4 @@ func decodeAliasDirectLinkRequest(r *http.Request) (interface{}, error) {
 		return nil, err
 	}
 	return request, nil
-}
-
-func NewAliasDirectLinkHandler(ctx context.Context) *httptransport.Server {
-	return httptransport.NewServer(
-		ctx,
-		makeAliasDirectLinkEndpoint(),
-		decodeAliasDirectLinkRequest,
-		service.EncodeResponse,
-	)
 }
