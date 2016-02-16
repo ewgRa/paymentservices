@@ -12,12 +12,10 @@ type Service struct {
 }
 
 func (s *Service) Start(ctx context.Context) {
-	kit_service.NewJsonTransport(alias_direct_link.NewRequest)
-
 	ks := kit_service.NewHandler(
 		ctx,
 		&alias_direct_link.Endpoint{},
-		kit_service.NewJsonTransport(alias_direct_link.NewRequest),
+		kit_service.NewJsonTransport(func() interface{} {return alias_direct_link.NewRequest()}),
 	)
 
 	http.Handle("/alias_direct_link.json", ks)

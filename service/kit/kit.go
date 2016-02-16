@@ -17,8 +17,8 @@ type JsonTransport struct {
 	CreateRequest func() interface{}
 }
 
-func NewJsonTransport(CreateRequest func() interface{}) *JsonTransport {
-	return &JsonTransport{CreateRequest: CreateRequest}
+func NewJsonTransport(crf func() interface{}) *JsonTransport {
+	return &JsonTransport{CreateRequest: crf}
 }
 
 func (t *JsonTransport) DecodeFunc() kithttp.DecodeRequestFunc {

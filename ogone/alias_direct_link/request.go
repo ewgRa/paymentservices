@@ -1,14 +1,14 @@
 package ogone_alias_direct_link
 
 type Request struct {
-	orderId  int    `json:"orderId"`
-	amount   int    `json:","`
-//	currency string `json:"currency"`
-	alias    string `json:"alias"`
+	OrderId  int    `json:"orderId"`
+	Amount   int    `json:","`
+//	Currency string `json:"currency"`
+	Alias    string `json:"alias"`
 }
 
 func (r *Request) isValid() error {
-	if "" == r.alias {
+	if "" == r.Alias {
 		return nil
 		//return errors.New("Alias required")
 	}
@@ -16,6 +16,6 @@ func (r *Request) isValid() error {
 	return nil
 }
 
-func NewRequest() interface {} {
+func NewRequest() *Request {
 	return &Request{}
 }
