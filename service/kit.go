@@ -1,11 +1,12 @@
 package service
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
 
-func KitJsonDecodeFunc(r *http.Request, request interface{}) (interface {}, error) {
+// KitJSONDecodeFunc decode json http request to endpoint request
+func KitJSONDecodeFunc(r *http.Request, request interface{}) (interface{}, error) {
 	if err := json.NewDecoder(r.Body).Decode(request); err != nil {
 		return nil, err
 	}
@@ -13,6 +14,7 @@ func KitJsonDecodeFunc(r *http.Request, request interface{}) (interface {}, erro
 	return request, nil
 }
 
-func KitJsonEncodeFunc(w http.ResponseWriter, response interface{}) error {
+// KitJSONEncodeFunc encode endpoint response to json
+func KitJSONEncodeFunc(w http.ResponseWriter, response interface{}) error {
 	return json.NewEncoder(w).Encode(response)
 }

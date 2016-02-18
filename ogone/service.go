@@ -1,17 +1,20 @@
 package ogone
 
 import (
-	"golang.org/x/net/context"
-	"net/http"
 	"log"
-	alias_direct_link "./alias_direct_link"
+	"net/http"
+
+	"./alias_direct_link"
+	"golang.org/x/net/context"
 )
 
+// Service for payments to ogone gateway
 type Service struct {
 }
 
+// Start service
 func (s *Service) Start(ctx context.Context) {
-	ks := alias_direct_link.NewKitHandler(ctx)
+	ks := aliasdirectlink.NewKitHandler(ctx)
 	http.Handle("/alias_direct_link.json", ks)
 
 	// FIXME XXX: configuration

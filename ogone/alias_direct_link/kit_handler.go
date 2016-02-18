@@ -1,12 +1,14 @@
-package ogone_alias_direct_link
+package aliasdirectlink
 
 import (
+	"net/http"
+
+	"../../service"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"golang.org/x/net/context"
-	"../../service"
-	"net/http"
 )
 
+// NewKitHandler create new kit handler
 func NewKitHandler(ctx context.Context) *kithttp.Server {
 	ep := &Endpoint{}
 
@@ -16,8 +18,8 @@ func NewKitHandler(ctx context.Context) *kithttp.Server {
 			return ep.Response(request.(*Request))
 		},
 		func(r *http.Request) (request interface{}, err error) {
-			return service.KitJsonDecodeFunc(r, NewRequest())
+			return service.KitJSONDecodeFunc(r, NewRequest())
 		},
-		service.KitJsonEncodeFunc,
+		service.KitJSONEncodeFunc,
 	)
 }
