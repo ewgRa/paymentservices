@@ -1,0 +1,38 @@
+sudo: false
+
+dist: trusty
+
+language: go
+
+go:
+  - 1.5.3
+  - 1.6rc1
+  - tip
+
+env:
+  global:
+    - GO15VENDOREXPERIMENT=1
+  allow_failures:
+    - go: tip
+
+install:
+    - go get -u github.com/golang/lint/golint
+    - go get -u golang.org/x/tools/cmd/goimports
+    - go get -u github.com/sqs/goreturns
+    - go get -u github.com/kisielk/errcheck
+
+branches:
+  only:
+    - "master"
+
+script:
+  - gofmt -l . | (! grep .) || (echo "Code differs from gofmt's style" && false)
+  - goimports -l . | (! grep .) || (echo "goimports detect some issues" && false)
+  - goreturns -l . | (! grep .) || (echo "goreturns detect some issues" && false)
+  - errcheck ./...
+  - go tool vet .
+  - find . -name "*.go" -exec golint {} \; | (! grep .) || (echo "Golint report some issues" && false)
+  - go test -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
