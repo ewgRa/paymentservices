@@ -1,4 +1,5 @@
 package aliasdirectlink
+
 /*
 import (
 	"fmt"

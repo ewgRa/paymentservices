@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"./alias_direct_link"
+	"./aliasdirectlink"
 	"golang.org/x/net/context"
 )
 
