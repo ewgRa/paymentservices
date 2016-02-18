@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"./aliasdirectlink"
+	"github.com/ewgRa/paymentservices/aliasdirectlink"
 	"golang.org/x/net/context"
 )
 

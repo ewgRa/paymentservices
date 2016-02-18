@@ -3,7 +3,7 @@ package aliasdirectlink
 import (
 	"net/http"
 
-	"../../service"
+	"github.com/ewgRa/paymentservices/service"
 	kithttp "github.com/go-kit/kit/transport/http"
 	"golang.org/x/net/context"
 )

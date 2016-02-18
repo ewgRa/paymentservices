@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./ogone"
+	"github.com/ewgRa/paymentservices/ogone"
 	"golang.org/x/net/context"
 )
 
