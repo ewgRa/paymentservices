@@ -20,7 +20,7 @@ install:
     - go get -u golang.org/x/tools/cmd/goimports
     - go get -u github.com/sqs/goreturns
     - go get -u github.com/kisielk/errcheck
-    - go get -u github.com/go-kit/kit
+    - go get -u github.com/go-kit/kit/transport/http
 
 branches:
   only:
