@@ -1,16 +1,16 @@
 package ogone
 
-
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"golang.org/x/net/context"
-	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
-	"strings"
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
+	"strings"
+
+	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
+	"golang.org/x/net/context"
 )
 
 func TestAliasDirectLinkEndpoint(t *testing.T) {
