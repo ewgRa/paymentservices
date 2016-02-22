@@ -39,7 +39,7 @@ script:
   - go tool vet .
   - golint ./... | (! grep .) || (echo "Golint report some issues" && false)
   - find . -name *_test.go -exec go test -coverprofile={}.coverage.out -coverpkg="./..." {} \;
-  - echo mode: set > coverage.txt
+  - echo "mode\: set" > coverage.txt
   - find . -name *coverage.out -exec cat {} \; | grep "mode:" -v | sort | uniq >> coverage.txt
 
 after_success:
