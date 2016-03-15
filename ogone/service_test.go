@@ -10,11 +10,15 @@ import (
 	"strings"
 
 	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
+	"github.com/ewgRa/paymentservices/service/metric"
 	"golang.org/x/net/context"
 )
 
 func TestAliasDirectLinkEndpoint(t *testing.T) {
-	ks := aliasdirectlink.NewKitHandler(context.Background())
+	metric := &metric.Metric{}
+	ep := &aliasdirectlink.Endpoint{M: metric}
+
+	ks := aliasdirectlink.NewKitHandler(context.Background(), ep)
 
 	server := httptest.NewServer(ks)
 
@@ -27,5 +31,9 @@ func TestAliasDirectLinkEndpoint(t *testing.T) {
 	if string(buf) != "{\"v\":\"OK\"}\n" {
 		fmt.Println(string(buf))
 		t.Fatalf("Wrong alias direct link response")
+	}
+
+	if metric.GetRequestsCount() != 1 {
+		t.Fatalf("Wrong metric for requests count")
 	}
 }
