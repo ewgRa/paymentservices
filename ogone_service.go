@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/ewgRa/paymentservices/ogone"
-	"golang.org/x/net/context"
 	"github.com/ewgRa/paymentservices/service"
+	"golang.org/x/net/context"
 )
 
 func main() {
