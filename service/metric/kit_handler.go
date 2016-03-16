@@ -1,4 +1,4 @@
-package aliasdirectlink
+package metric
 
 import (
 	"net/http"
@@ -16,6 +16,10 @@ func NewKitHandler(ctx context.Context, ep *Endpoint) *kithttp.Server {
 			return ep.Response(request.(*Request))
 		},
 		func(r *http.Request) (request interface{}, err error) {
+			if r.ContentLength == 0 {
+				return NewRequest(), nil
+			}
+
 			return service.KitJSONDecodeFunc(r, NewRequest())
 		},
 		service.KitJSONEncodeFunc,
