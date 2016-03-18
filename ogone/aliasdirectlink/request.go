@@ -2,8 +2,8 @@ package aliasdirectlink
 
 // Request for Alias direct link
 type Request struct {
-	OrderID int `json:"orderId"`
-	Amount  int `json:","`
+	OrderID string `json:"orderId"`
+	Amount  string `json:","`
 	//	Currency string `json:"currency"`
 	Alias string `json:"alias"`
 }
