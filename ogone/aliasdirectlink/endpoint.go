@@ -1,8 +1,8 @@
 package aliasdirectlink
 
 import (
-	"github.com/ewgRa/paymentservices/service/metric"
 	"github.com/ewgRa/ogone"
+	"github.com/ewgRa/paymentservices/service/metric"
 )
 
 // Endpoint for Alias Direct Link
@@ -23,20 +23,20 @@ func (ep *Endpoint) Response(r *Request) (*Response, error) {
 	dlr := ogone.NewDirectLinkRequest()
 
 	dlr.
-	SetAlias(r.Alias).
-	SetAmount(r.Amount).
-	SetReserveOperation().
-	SetCurrency("EUR").
-	SetOrderID(r.OrderID)
+		SetAlias(r.Alias).
+		SetAmount(r.Amount).
+		SetReserveOperation().
+		SetCurrency("EUR").
+		SetOrderID(r.OrderID)
 
 	dlg := ogone.NewDirectLinkGateway()
 
 	// FIXME XXX: configuration here
 	dlr.
-	SetPspID("ewgraogone").
-	SetUserID("ewgragolang").
-	SetPassword("123123aa").
-	Sign("qwdqwoidj29812d9")
+		SetPspID("ewgraogone").
+		SetUserID("ewgragolang").
+		SetPassword("123123aa").
+		Sign("qwdqwoidj29812d9")
 
 	dlResp, _ := dlg.SandboxSend(dlr)
 

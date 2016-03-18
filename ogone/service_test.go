@@ -9,14 +9,15 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
-	"github.com/ewgRa/paymentservices/service/metric"
-	"golang.org/x/net/context"
-	ogonelib "github.com/ewgRa/ogone"
+	"encoding/json"
 	"math/rand"
 	"strconv"
 	"time"
-	"encoding/json"
+
+	ogonelib "github.com/ewgRa/ogone"
+	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
+	"github.com/ewgRa/paymentservices/service/metric"
+	"golang.org/x/net/context"
 )
 
 // FIXME XXX: test non valid request, like without orderId and so on
