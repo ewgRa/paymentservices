@@ -1,4 +1,4 @@
-package ogone
+package aliasdirectlink
 
 import (
 	"net/http"
@@ -15,7 +15,7 @@ import (
 	"time"
 
 	ogonelib "github.com/ewgRa/ogone"
-	"github.com/ewgRa/paymentservices/ogone/aliasdirectlink"
+	"github.com/ewgRa/paymentservices/ogone"
 	"github.com/ewgRa/paymentservices/service/metric"
 	"golang.org/x/net/context"
 )
@@ -23,9 +23,18 @@ import (
 // FIXME XXX: test non valid request, like without orderId and so on
 func TestAliasDirectLinkEndpoint(t *testing.T) {
 	metric := &metric.Metric{}
-	ep := &aliasdirectlink.Endpoint{M: metric}
 
-	ks := aliasdirectlink.NewKitHandler(context.Background(), ep)
+	config := ogone.NewConfig(
+		"ewgraogone",
+		"ewgragolang",
+		"123123aa",
+		"qwdqwoidj29812d9",
+		true,
+	)
+
+	ep := &Endpoint{M: metric, C: config}
+
+	ks := NewKitHandler(context.Background(), ep)
 
 	server := httptest.NewServer(ks)
 

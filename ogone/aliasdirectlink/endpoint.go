@@ -2,12 +2,14 @@ package aliasdirectlink
 
 import (
 	"github.com/ewgRa/ogone"
+	ogoneservice "github.com/ewgRa/paymentservices/ogone"
 	"github.com/ewgRa/paymentservices/service/metric"
 )
 
 // Endpoint for Alias Direct Link
 type Endpoint struct {
 	M *metric.Metric
+	C *ogoneservice.Config
 }
 
 // Response for Alias Direct Link request
@@ -31,14 +33,19 @@ func (ep *Endpoint) Response(r *Request) (*Response, error) {
 
 	dlg := ogone.NewDirectLinkGateway()
 
-	// FIXME XXX: configuration here
 	dlr.
-		SetPspID("ewgraogone").
-		SetUserID("ewgragolang").
-		SetPassword("123123aa").
-		Sign("qwdqwoidj29812d9")
+		SetPspID(ep.C.GetPspID()).
+		SetUserID(ep.C.GetUserID()).
+		SetPassword(ep.C.GetPassword()).
+		Sign(ep.C.GetSign())
 
-	dlResp, _ := dlg.SandboxSend(dlr)
+	var dlResp *ogone.DirectLinkResponse
+
+	if ep.C.IsSandbox() {
+		dlResp, _ = dlg.SandboxSend(dlr)
+	} else {
+		dlResp, _ = dlg.Send(dlr)
+	}
 
 	if !dlResp.IsAuthorised() {
 		return &Response{"NOK", ""}, nil
