@@ -25,7 +25,7 @@ func (c *Config) GetPspID() string {
 	return c.pspID
 }
 
-// GetPspID return pspID configuration
+// GetUserID return userID configuration
 func (c *Config) GetUserID() string {
 	return c.userID
 }

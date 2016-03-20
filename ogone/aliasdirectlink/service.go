@@ -11,6 +11,7 @@ import (
 	"golang.org/x/net/context"
 )
 
+// Run the alias direct link service
 func Run() {
 	conf := service.NewConfig("", 8080, "/alias_direct_link.json", "/alias_direct_link.metric.json")
 
